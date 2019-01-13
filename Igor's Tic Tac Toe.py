@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-
 def display_board(board):
+    print('\n'*100)
     print(f'   |   |   \n {board[7]} | {board[8]} | {board[9]} \n___|___|___\n   |   |   \n {board[4]} | {board[5]} | {board[6]} \n___|___|___\n   |   |   \n {board[1]} | {board[2]} | {board[3]} \n   |   |   ')
 
 
@@ -21,15 +21,18 @@ def askmove():
         
     elif activeplayer == "Player Two":
         board[move] = p2symbol
+
+
+def replay():
     
+    return input('Do you want to play again? Enter Yes or No: ').lower().startswith('y')
+    
+while True:
 
-
-p1symbol = ''
-board = ["#", " ", " ", " ", " ", " ", " ", " ", " ", " "]
-activeplayer = "Player One"
-gameon = True  
-
-while gameon == True:
+    p1symbol = ''
+    board = ["#", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+    activeplayer = "Player One" 
+    gameon = True
 
     while p1symbol.lower() != 'o' and  p1symbol.lower() != 'x':
         p1symbol = input('Player One, which symbol do you want to play? X or O? ').lower()
@@ -40,29 +43,31 @@ while gameon == True:
             print("Alright, so Player One plays X, Player Two plays O.")
             p2symbol = 'o'
 
+    while gameon == True:
 
+        askmove()
 
-
-    askmove()
-
-    if activeplayer == "Player One":
-        activeplayer = "Player Two"
-    elif activeplayer == "Player Two":
-        activeplayer = "Player One"
+        if activeplayer == "Player One":
+            activeplayer = "Player Two"
+        elif activeplayer == "Player Two":
+            activeplayer = "Player One"
     
-    display_board(board)
+        display_board(board)
     
-    if p1symbol == board[1] == board[5] == board[9] or p1symbol == board[3] == board[5] == board[7] or p1symbol == board[3] == board[6] == board[9] or p1symbol == board[2] == board[5] == board[8] or p1symbol == board[1] == board[4] == board[7] or p1symbol == board[1] == board[2] == board[3] or p1symbol == board[4] == board[5] == board[6] or p1symbol == board[7] == board[8] == board[9]:
-        print("Congratulations Player One, you won!")
-        gameon = False
+        if p1symbol == board[1] == board[5] == board[9] or p1symbol == board[3] == board[5] == board[7] or p1symbol == board[3] == board[6] == board[9] or p1symbol == board[2] == board[5] == board[8] or p1symbol == board[1] == board[4] == board[7] or p1symbol == board[1] == board[2] == board[3] or p1symbol == board[4] == board[5] == board[6] or p1symbol == board[7] == board[8] == board[9]:
+            print("Congratulations Player One, you won!")
+            gameon = False
+            
         
+        if p2symbol == board[1] == board[5] == board[9] or p2symbol == board[3] == board[5] == board[7] or p2symbol == board[3] == board[6] == board[9] or p2symbol == board[2] == board[5] == board[8] or p2symbol == board[1] == board[4] == board[7] or p2symbol == board[1] == board[2] == board[3] or p2symbol == board[4] == board[5] == board[6] or p2symbol == board[7] == board[8] == board[9]:
+            print("Congratulations Player Two, you won!")
+            gameon = False
+            
         
-    if p2symbol == board[1] == board[5] == board[9] or p2symbol == board[3] == board[5] == board[7] or p2symbol == board[3] == board[6] == board[9] or p2symbol == board[2] == board[5] == board[8] or p2symbol == board[1] == board[4] == board[7] or p2symbol == board[1] == board[2] == board[3] or p2symbol == board[4] == board[5] == board[6] or p2symbol == board[7] == board[8] == board[9]:
-        print("Congratulations Player Two, you won!")
-        gameon = False
-        
-    
-    if " " not in board:
-        print('The game is tied!')
-        gameon = False 
-        
+        if " " not in board:
+            print('The game is tied!')
+            gameon = False
+            
+
+    if not replay():
+        break
